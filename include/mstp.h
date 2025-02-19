@@ -10,24 +10,6 @@
 /* definitions                                                               */
 /*****************************************************************************/
 
-#define ENCODE_REGION_WITH_MSTID(mstid,region_id) \
-(UINT16)( ( ((UINT16)region_id) << 12)  |  mstid)
-
-#define DECODE_REGION_FROM_MSTID(mstid) \
-(mstid >> 12)
-
-#define DECODE_MSTID_FROM_MSTID(mstid) \
-(mstid & 0x07ff)
-
-#define ENCODE_REGION_WITH_MSTP_INDEX(mstp_index,region_id) \
-(UINT16)( ( ((UINT16)region_id) << 5)  |  mstp_index)
-
-#define DECODE_REGION_FROM_MSTP_INDEX(mstp_index) \
-(mstp_index >> 5)
-
-#define DECODE_MST_INDEX_FROM_MST_INDEX(mstp_index) \
-(mstp_index & 0x01F)
-
 #define MSTP_INDEX_MIN                      0
 #define MSTP_INDEX_MAX                     (MSTP_MAX_INSTANCES_PER_REGION-1)
 #define MSTP_INDEX_CIST                     MSTP_MAX_INSTANCES_PER_REGION

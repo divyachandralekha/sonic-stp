@@ -158,7 +158,6 @@ extern "C" {
     {
         stpsync.delStpMstInterfaceInfo(if_name, mst_id);
     }
-    }
 }
 
 

@@ -16,7 +16,6 @@
 
 #define MSTP_MIN_INSTANCES                  1
 #define MSTP_MAX_INSTANCES_PER_REGION		64
-#define MSTP_VERSION_ID                     3
 
 #define MSTP_BPDU_BASE_SIZE                 38
 #define MSTP_BPDU_BASE_V3_LENGTH            64
@@ -31,17 +30,12 @@
 typedef struct
 {
 #if __BYTE_ORDER == __BIG_ENDIAN
-	// bridge priority
-	UINT16                  priority:4;
-	// system-id
-	UINT16                  system_id:12;
+	UINT16                  priority:4;  // bridge priority
+	UINT16                  system_id:12;// system-id
 #else
-	// system-id
-	UINT16                  system_id:12;
-	// bridge priority
-	UINT16                  priority:4;
-#endif // BIG_ENDIAN
-
+	UINT16                  system_id:12; // system-id
+	UINT16                  priority:4; // bridge priority
+#endif
 	// mac-address for the bridge
 	MAC_ADDRESS             address;
 
@@ -68,7 +62,7 @@ typedef struct
 	UINT8                   forwarding:1;
 	UINT8                   agreement:1;
 	UINT8                   master:1;
-#endif // !BIG_ENDIAN
+#endif
 } __attribute__ ((packed))MSTI_FLAGS;
 
 /*****************************************************************************/
@@ -118,7 +112,7 @@ typedef struct
 typedef struct
 {
 	// configuration identifier format selector - encoded as 0
-	UINT8                   format_selector;
+	UINT8                   format_selector; 
 
 	// configuration name - variable text string conforming to rfc 2271
 	// definition snmpAdminString

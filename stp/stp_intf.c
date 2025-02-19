@@ -17,6 +17,18 @@
 
 #include "stp_inc.h"
 
+/*
+ * Input:
+ *   pointer to STATIC_BITMAP_T
+ * Return:
+ *   pointer to BITMAP_T, so static bitmap can levarage and utilize all apis written for dynamic bmp.
+ */
+BITMAP_T *static_portmask_init(STATIC_BITMAP_T *bmp)
+{
+    static_bmp_init(bmp);
+    return (BITMAP_T *)bmp;
+}
+
 int stp_intf_get_netlink_fd()
 {
     return stpd_context.netlink_fd;

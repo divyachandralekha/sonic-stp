@@ -24,6 +24,7 @@ typedef enum L2_PROTO_MODE
 {
     L2_NONE,
     L2_PVSTP,
+    L2_MSTP
 } L2_PROTO_MODE;
 
 typedef enum STP_MSG_TYPE
@@ -36,6 +37,10 @@ typedef enum STP_MSG_TYPE
     STP_PORT_CONFIG,
     STP_VLAN_MEM_CONFIG,
     STP_STPCTL_MSG,
+    STP_MST_GLOBAL_CONFIG,
+    STP_MST_INST_CONFIG,
+    STP_MST_VLAN_PORT_LIST_CONFIG,
+    STP_MST_INST_PORT_CONFIG,
     STP_MAX_MSG
 } STP_MSG_TYPE;
 
@@ -56,6 +61,8 @@ typedef enum STP_CTL_TYPE
     STP_CTL_CLEAR_VLAN,
     STP_CTL_CLEAR_INTF,
     STP_CTL_CLEAR_VLAN_INTF,
+    STP_CTL_DUMP_MST,
+    STP_CTL_DUMP_MST_PORT,
     STP_CTL_MAX
 } STP_CTL_TYPE;
 
@@ -63,6 +70,7 @@ typedef struct STP_IPC_MSG
 {
     int msg_type;
     unsigned int msg_len;
+    L2_PROTO_MODE   proto_mode;
     char data[0];
 } __attribute__((aligned(4))) STP_IPC_MSG;
 
@@ -172,7 +180,7 @@ typedef struct STP_DEBUG_OPT
     uint8_t event : 1;
     uint8_t port : 1;
     uint8_t vlan : 1;
-    uint8_t spare : 1;
+    uint8_t mst : 1;
 } __attribute__((aligned(4))) STP_DEBUG_OPT;
 
 typedef struct STP_CTL_MSG
@@ -182,6 +190,7 @@ typedef struct STP_CTL_MSG
     char intf_name[IFNAMSIZ];
     int level;
     STP_DEBUG_OPT dbg;
+    int mst_id;
 } __attribute__((aligned(4))) STP_CTL_MSG;
 
 #endif
